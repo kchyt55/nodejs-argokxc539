@@ -1,21 +1,21 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image名称：构建和推送Docker镜像名称：构建和推送Docker镜像
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main    分支：   分支：[主][主]]
     paths:
       - 'Dockerfile'
       - 'index.js'
       - 'package.json'
   pull_request:
-    branches: [ main ]
+    branches: [ main    分支：   分支：[主][主]]
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest   上运行   上运行:ubuntu-latest:ubuntu-latest
     permissions:
-      contents: read
+      contents: read   内容   内容:读:读
       packages: write
 
     steps:
@@ -29,17 +29,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx—name：安装Docker Buildx—name：安装Docker Buildx
+        uses: docker/setup-buildx-action@v3用途用途:码头工人/ setup-buildx-action@v3:码头工人/ setup-buildx-action@v3
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
+      - name: Build and push Docker image- name：构建和推送Docker镜像- name：构建和推送Docker镜像
+        uses   使用: docker/build-push-action@v5
+        with   与:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/${{ github.repository_owner }}/nodejs:latest
+            ghcr.io/${{ github.repository_owner }}/kchyt:5509
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.description=HTTP Server
